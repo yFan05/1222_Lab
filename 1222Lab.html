@@ -6,44 +6,59 @@
     <title>Rolling Dice</title>
 </head>
 <body>
+    <form action="#">
+        <input id="rollButton" type="button" value="Roll Dice">
+    </form>
+    <img id="die1" src="die1.png" alt="dice image">
+    <img id="die2" src="die2.png" alt="dice image">
+    <img id="die3" src="die3.png" alt="dice image">
+    <img id="die4" src="die4.png" alt="dice image">
+    <img id="die5" src="die5.png" alt="dice image">
+    <img id="die6" src="die6.png" alt="dice image">
+
     <script>
+        var die1Image, die2Image, die3Image, die4Image, die5Image, die6Image;
+
         function start() {
-
-        } // end function start
-
-        // roll the dice
-        function rollDice() {
-
-        }// end function rollDice
-
-        // set src and alt attributes for a die
-        function setImage( dieImg ){
-
-        }// end function setImage
-
-        window.addEventListner( "load", start);
-
-        function start(){
             var button = document.getElementById("rollButton");
-            button.addEventListener("click", rollDice, false);
-        }// end function start
-
-        //roll the dice
-        function rollDice(){
-
-        }// end function rollDice
-
-        //set image source for a die
-        function setImage(dieNumber, face){
-            
+            button.addEventListener("click", rollDice);
+            die1Image = document.getElementById("die1");
+            die2Image = document.getElementById("die2");
+            die3Image = document.getElementById("die3");
+            die4Image = document.getElementById("die4");
+            die5Image = document.getElementById("die5");
+            die6Image = document.getElementById("die6");
         }
 
-        // update frequency table in the page
+        function rollDice() {
+            setImage(die1Image);
+            setImage(die2Image);
+            setImage(die3Image);
+            setImage(die4Image);
+            setImage(die5Image);
+            setImage(die6Image);
+        }
+
+        function setImage(dieImg) {
+            var dieValue = Math.floor(1 + Math.random() * 6);
+            dieImg.setAttribute("src", "die" + dieValue + ".png");
+            dieImg.setAttribute("alt", "die image with " + dieValue + " spot(s)");
+        }
+
+        window.addEventListener("load", start);
+
         function updateFrequencyTable() {
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "<h2>Probability of each face:</h2>";
 
-        } // end function updateFrequencyTable
+            var probabilities = [25, 41.67, 25, 0, 8.33, 0];
 
-        window.addEventListener("load", start, false);
+            for (var i = 0; i < faceCounts.length; i++) {
+                var face = i + 1;
+                var percent = probabilities[i];
+                resultDiv.innerHTML += "<p>" + face + " | " + percent.toFixed(2) + "%</p>";
+            } // end function updateFrequencyTable
+        }
     </script>
 </body>
 </html>
